@@ -1,0 +1,366 @@
+Traceback (most recent call last):
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+    ~~~~~~~~~~~~^^^^
+ConnectionRefusedError: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/connectionpool.py", line 493, in _make_request
+    conn.request(
+    ~~~~~~~~~~~~^
+        method,
+        ^^^^^^^
+    ...<6 lines>...
+        enforce_content_length=enforce_content_length,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/connection.py", line 500, in request
+    self.endheaders()
+    ~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/client.py", line 1353, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/client.py", line 1113, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/client.py", line 1057, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/connection.py", line 331, in connect
+    self.sock = self._new_conn()
+                ~~~~~~~~~~~~~~^^
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/connection.py", line 219, in _new_conn
+    raise NewConnectionError(
+        self, f"Failed to establish a new connection: {e}"
+    ) from e
+urllib3.exceptions.NewConnectionError: HTTPConnection(host='localhost', port=5001): Failed to establish a new connection: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/requests/adapters.py", line 644, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/util/retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=5001): Max retries exceeded with url: /api/auth/login (Caused by NewConnectionError("HTTPConnection(host='localhost', port=5001): Failed to establish a new connection: [Errno 61] Connection refused"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/simulator/simulate.py", line 98, in <module>
+    main()
+    ~~~~^^
+  File "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/simulator/simulate.py", line 74, in main
+    token = get_token()
+  File "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/simulator/simulate.py", line 14, in get_token
+    resp = requests.post(
+        f"{API_URL}/api/auth/login",
+        json={"email": ADMIN_EMAIL, "password": ADMIN_PASSWORD}
+    )
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/requests/adapters.py", line 677, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=5001): Max retries exceeded with url: /api/auth/login (Caused by NewConnectionError("HTTPConnection(host='localhost', port=5001): Failed to establish a new connection: [Errno 61] Connection refused"))
+Traceback (most recent call last):
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+    ~~~~~~~~~~~~^^^^
+ConnectionRefusedError: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/connectionpool.py", line 493, in _make_request
+    conn.request(
+    ~~~~~~~~~~~~^
+        method,
+        ^^^^^^^
+    ...<6 lines>...
+        enforce_content_length=enforce_content_length,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/connection.py", line 500, in request
+    self.endheaders()
+    ~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/client.py", line 1353, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/client.py", line 1113, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/client.py", line 1057, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/connection.py", line 331, in connect
+    self.sock = self._new_conn()
+                ~~~~~~~~~~~~~~^^
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/connection.py", line 219, in _new_conn
+    raise NewConnectionError(
+        self, f"Failed to establish a new connection: {e}"
+    ) from e
+urllib3.exceptions.NewConnectionError: HTTPConnection(host='localhost', port=5001): Failed to establish a new connection: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/requests/adapters.py", line 644, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/util/retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='localhost', port=5001): Max retries exceeded with url: /api/auth/login (Caused by NewConnectionError("HTTPConnection(host='localhost', port=5001): Failed to establish a new connection: [Errno 61] Connection refused"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/simulator/simulate.py", line 98, in <module>
+    main()
+    ~~~~^^
+  File "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/simulator/simulate.py", line 74, in main
+    token = get_token()
+  File "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/simulator/simulate.py", line 14, in get_token
+    resp = requests.post(
+        f"{API_URL}/api/auth/login",
+        json={"email": ADMIN_EMAIL, "password": ADMIN_PASSWORD}
+    )
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/requests/adapters.py", line 677, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=5001): Max retries exceeded with url: /api/auth/login (Caused by NewConnectionError("HTTPConnection(host='localhost', port=5001): Failed to establish a new connection: [Errno 61] Connection refused"))
+Starting simulator -> count=1000000 interval=3.0s fast=False
+Traceback (most recent call last):
+  File "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/simulator/simulate.py", line 98, in <module>
+    main()
+    ~~~~^^
+  File "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/simulator/simulate.py", line 88, in main
+    post_reading(payload)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/simulator/simulate.py", line 64, in post_reading
+    resp.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/requests/models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 429 Client Error: Too Many Requests for url: http://localhost:5001/api/ingest
+Starting simulator -> count=1000000 interval=3.0s fast=False
+Traceback (most recent call last):
+  File "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/simulator/simulate.py", line 98, in <module>
+    main()
+    ~~~~^^
+  File "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/simulator/simulate.py", line 88, in main
+    post_reading(payload)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/simulator/simulate.py", line 64, in post_reading
+    resp.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/requests/models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 429 Client Error: Too Many Requests for url: http://localhost:5001/api/ingest
+Starting simulator -> count=1000000 interval=3.0s fast=False
+Traceback (most recent call last):
+  File "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/simulator/simulate.py", line 98, in <module>
+    main()
+    ~~~~^^
+  File "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/simulator/simulate.py", line 88, in main
+    post_reading(payload)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/simulator/simulate.py", line 64, in post_reading
+    resp.raise_for_status()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/requests/models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 429 Client Error: Too Many Requests for url: http://127.0.0.1:5010/api/ingest
+Starting simulator -> count=1000000 interval=3.0s fast=False
+Generated 1000 readings
+Generated 2000 readings
+Generated 3000 readings
+Generated 4000 readings
+Generated 5000 readings
+Generated 6000 readings
+Generated 7000 readings
+Generated 8000 readings
+Generated 9000 readings
+Generated 10000 readings
+Generated 11000 readings
+Generated 12000 readings
+Generated 13000 readings
+Generated 14000 readings
+Generated 15000 readings
+Generated 16000 readings
+Generated 17000 readings
+Generated 18000 readings
+Generated 19000 readings
+Generated 20000 readings
+Generated 21000 readings
+Generated 22000 readings
+Generated 23000 readings
+Generated 24000 readings
+Generated 25000 readings
+Generated 26000 readings
+Generated 27000 readings
+Generated 28000 readings
+Generated 29000 readings
+Generated 30000 readings
+Traceback (most recent call last):
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/connection.py", line 204, in _new_conn
+    sock = connection.create_connection(
+        (self._dns_host, self.port),
+    ...<2 lines>...
+        socket_options=self.socket_options,
+    )
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+    ~~~~~~~~~~~~^^^^
+ConnectionRefusedError: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/connectionpool.py", line 787, in urlopen
+    response = self._make_request(
+        conn,
+    ...<10 lines>...
+        **response_kw,
+    )
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/connectionpool.py", line 493, in _make_request
+    conn.request(
+    ~~~~~~~~~~~~^
+        method,
+        ^^^^^^^
+    ...<6 lines>...
+        enforce_content_length=enforce_content_length,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/connection.py", line 500, in request
+    self.endheaders()
+    ~~~~~~~~~~~~~~~^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/client.py", line 1353, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/client.py", line 1113, in _send_output
+    self.send(msg)
+    ~~~~~~~~~^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.14/lib/python3.14/http/client.py", line 1057, in send
+    self.connect()
+    ~~~~~~~~~~~~^^
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/connection.py", line 331, in connect
+    self.sock = self._new_conn()
+                ~~~~~~~~~~~~~~^^
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/connection.py", line 219, in _new_conn
+    raise NewConnectionError(
+        self, f"Failed to establish a new connection: {e}"
+    ) from e
+urllib3.exceptions.NewConnectionError: HTTPConnection(host='127.0.0.1', port=5010): Failed to establish a new connection: [Errno 61] Connection refused
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/requests/adapters.py", line 644, in send
+    resp = conn.urlopen(
+        method=request.method,
+    ...<9 lines>...
+        chunked=chunked,
+    )
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+        method, url, error=new_e, _pool=self, _stacktrace=sys.exc_info()[2]
+    )
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/urllib3/util/retry.py", line 535, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='127.0.0.1', port=5010): Max retries exceeded with url: /api/ingest (Caused by NewConnectionError("HTTPConnection(host='127.0.0.1', port=5010): Failed to establish a new connection: [Errno 61] Connection refused"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/simulator/simulate.py", line 98, in <module>
+    main()
+    ~~~~^^
+  File "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/simulator/simulate.py", line 88, in main
+    post_reading(payload)
+    ~~~~~~~~~~~~^^^^^^^^^
+  File "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/simulator/simulate.py", line 59, in post_reading
+    resp = requests.post(
+        f"{API_URL}/api/ingest",
+        json=payload,
+        headers=headers
+    )
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/requests/api.py", line 115, in post
+    return request("post", url, data=data, json=json, **kwargs)
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/mkm/Library/Python/3.14/lib/python/site-packages/requests/adapters.py", line 677, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='127.0.0.1', port=5010): Max retries exceeded with url: /api/ingest (Caused by NewConnectionError("HTTPConnection(host='127.0.0.1', port=5010): Failed to establish a new connection: [Errno 61] Connection refused"))

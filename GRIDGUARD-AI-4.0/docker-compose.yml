@@ -1,0 +1,65 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: gridguard
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    ports:
+      - "6379:6379"
+
+  ai-service:
+    build: ./ai-service
+    ports:
+      - "8001:8001"
+
+  backend:
+    build: ./backend
+    environment:
+      PORT: 5001
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/gridguard
+      JWT_SECRET: change-me
+      JWT_REFRESH_SECRET: change-me-refresh
+      CORS_ORIGIN: http://localhost:5173
+      REDIS_URL: redis://redis:6379
+      AI_SERVICE_URL: http://ai-service:8001
+      LLM_PROVIDER: ${LLM_PROVIDER:-gemini}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-1.5-flash}
+      GEMINI_BASE_URL: ${GEMINI_BASE_URL:-https://generativelanguage.googleapis.com/v1beta}
+      LLM_API_URL: ${LLM_API_URL:-}
+      LLM_API_KEY: ${LLM_API_KEY:-}
+      REPORTS_DIR: /app/reports
+      ELECTRICITYMAPS_API_KEY: ${ELECTRICITYMAPS_API_KEY:-}
+      ELECTRICITYMAPS_BASE_URL: https://api.electricitymap.org
+      ELECTRICITYMAPS_DEFAULT_ZONE: IN
+      ELECTRICITYMAPS_POLL_SECONDS: 180
+      ELECTRICITYMAPS_REGION_ZONE_MAP: '{"Maharashtra":"IN","Gujarat":"IN","Karnataka":"IN","Tamil Nadu":"IN","Delhi":"IN"}'
+    depends_on:
+      - postgres
+      - redis
+      - ai-service
+    ports:
+      - "5001:5001"
+    volumes:
+      - reports:/app/reports
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
+  reports:
