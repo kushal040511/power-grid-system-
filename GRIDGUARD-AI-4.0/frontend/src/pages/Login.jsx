@@ -4,8 +4,8 @@ import api from "../services/api";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("admin@gridguard.ai");
-  const [password, setPassword] = useState("admin123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
   const submit = async (e) => {

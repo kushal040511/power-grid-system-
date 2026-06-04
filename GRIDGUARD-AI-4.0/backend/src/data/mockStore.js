@@ -37,7 +37,12 @@ export const ensureMockSeed = async () => {
   if (!isMockMode() || seeded) return;
   seeded = true;
 
-  const adminHash = await bcrypt.hash("admin123", 10);
+  const adminPassword = process.env.ADMIN_PASSWORD;
+  if (!adminPassword) {
+    throw new Error("ADMIN_PASSWORD must be set before seeding mock users");
+  }
+
+  const adminHash = await bcrypt.hash(adminPassword, 10);
 
   mockStore.users.push({
     _id: randomUUID(),

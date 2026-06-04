@@ -17,6 +17,11 @@ const states = [
 ];
 
 const run = async () => {
+  const adminPassword = process.env.ADMIN_PASSWORD;
+  if (!adminPassword) {
+    throw new Error("ADMIN_PASSWORD must be set before running the seed script");
+  }
+
   await connectDb(process.env.MONGO_URI);
 
   await Promise.all([
@@ -26,7 +31,7 @@ const run = async () => {
     SmartMeter.deleteMany({})
   ]);
 
-  const passwordHash = await bcrypt.hash("admin123", 10);
+  const passwordHash = await bcrypt.hash(adminPassword, 10);
   await User.create({ name: "Super Admin", email: "admin@gridguard.ai", passwordHash, role: "SUPER_ADMIN" });
 
   const regions = await Region.insertMany(

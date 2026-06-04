@@ -5,12 +5,15 @@ import argparse
 import requests
 
 API_URL = os.getenv("BACKEND_URL", "http://localhost:5001")
-ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "admin@gridguard.ai")
-ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "admin123")
+ADMIN_EMAIL = os.getenv("ADMIN_EMAIL", "")
+ADMIN_PASSWORD = os.getenv("ADMIN_PASSWORD", "")
 INGEST_API_KEY = os.getenv("INGEST_API_KEY", "")
 
 
 def get_token():
+    if not ADMIN_EMAIL or not ADMIN_PASSWORD:
+        raise RuntimeError("ADMIN_EMAIL and ADMIN_PASSWORD must be set to run the simulator")
+
     resp = requests.post(
         f"{API_URL}/api/auth/login",
         json={"email": ADMIN_EMAIL, "password": ADMIN_PASSWORD}

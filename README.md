@@ -160,10 +160,10 @@ http://127.0.0.1:5210/login
 Stop everything:
 
 ./stop-local.sh
-Default login:
+Seeded admin account:
 
 admin@gridguard.ai
-admin123
+Set `ADMIN_PASSWORD` in `backend/.env` before running the seed script.
 7. Manual Local Setup
 7.1 Prerequisites
 Node.js 18+
@@ -201,13 +201,13 @@ cd simulator
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
-BACKEND_URL=http://127.0.0.1:5010 INGEST_API_KEY=gridguard_ingest_key python simulate.py --count 1000000 --interval 3
+BACKEND_URL=http://127.0.0.1:5010 ADMIN_EMAIL=admin@gridguard.ai ADMIN_PASSWORD=<your-admin-password> INGEST_API_KEY=<your-ingest-api-key> python simulate.py --count 1000000 --interval 3
 8. Environment Variables
 8.1 Backend (backend/.env)
 PORT=5010
-DATABASE_URL=postgresql://<user>@localhost:5432/gridguard
-JWT_SECRET=change-me
-JWT_REFRESH_SECRET=change-me-refresh
+DATABASE_URL=postgresql://<user>:<password>@localhost:5432/gridguard
+JWT_SECRET=<long-random-secret>
+JWT_REFRESH_SECRET=<different-long-random-secret>
 CORS_ORIGIN=http://localhost:5210,http://127.0.0.1:5210
 REDIS_URL=redis://localhost:6379
 AI_SERVICE_URL=http://localhost:8001
@@ -221,7 +221,8 @@ LLM_API_URL=
 LLM_API_KEY=
 
 REPORTS_DIR=./reports
-INGEST_API_KEY=gridguard_ingest_key
+INGEST_API_KEY=<long-random-ingest-key>
+ADMIN_PASSWORD=<strong-admin-password>
 
 ELECTRICITYMAPS_API_KEY=
 ELECTRICITYMAPS_BASE_URL=https://api.electricitymap.org

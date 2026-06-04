@@ -7,6 +7,6 @@
     "stop": "cd \"GRIDGUARD-AI-4.0\" && ./stop-local.sh",
     "dev": "cd \"GRIDGUARD-AI-4.0/frontend\" && VITE_API_URL=http://127.0.0.1:5010/api VITE_SOCKET_URL=http://127.0.0.1:5010 npm run dev -- --host 127.0.0.1 --port 5210 --strictPort",
     "backend": "cd \"GRIDGUARD-AI-4.0/backend\" && PORT=5010 npm start",
-    "simulator": "cd \"GRIDGUARD-AI-4.0/simulator\" && BACKEND_URL=http://127.0.0.1:5010 INGEST_API_KEY=gridguard_ingest_key python3 simulate.py --count 1000000 --interval 3"
+    "simulator": "cd \"GRIDGUARD-AI-4.0/simulator\" && BACKEND_URL=http://127.0.0.1:5010 python3 simulate.py --count 1000000 --interval 3"
   }
 }

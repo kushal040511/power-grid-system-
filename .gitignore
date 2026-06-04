@@ -1,0 +1,33 @@
+.DS_Store
+
+# Dependencies
+node_modules/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Runtime output
+.logs/
+.pids/
+reports/
+*.log
+*.pid
+
+# Build/cache output
+dist/
+build/
+coverage/
+__pycache__/
+*.py[cod]
+
+# Private key material
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+id_rsa*
+credentials.json
+service-account*.json

@@ -20,7 +20,7 @@ GRIDGUARD-AI-4.0/
 ## Local Setup
 ### Quick Start (Recommended)
 ```bash
-cd "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0"
+cd GRIDGUARD-AI-4.0
 ./run-local.sh
 ```
 
@@ -38,7 +38,7 @@ createdb gridguard
 
 ### 2) Backend
 ```bash
-cd "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/backend"
+cd GRIDGUARD-AI-4.0/backend
 cp .env.example .env
 npm install
 npm run migrate
@@ -50,7 +50,7 @@ npm run dev
 
 Set your Electricity Maps token in `backend/.env`:
 ```bash
-ELECTRICITYMAPS_API_KEY=your_token
+ELECTRICITYMAPS_API_KEY=<your-electricity-maps-token>
 ELECTRICITYMAPS_BASE_URL=https://api.electricitymap.org
 ```
 If `ELECTRICITYMAPS_API_KEY` is not set, simulator data continues to drive the map and `/api/electricity-maps/sync` returns `400` (to avoid overwriting live values with empty data).
@@ -58,22 +58,22 @@ If `ELECTRICITYMAPS_API_KEY` is not set, simulator data continues to drive the m
 Configure Google Gemini 1.5 Flash in `backend/.env`:
 ```bash
 LLM_PROVIDER=gemini
-GEMINI_API_KEY=your_google_ai_key
+GEMINI_API_KEY=<your-google-ai-key>
 GEMINI_MODEL=gemini-1.5-flash
 GEMINI_BASE_URL=https://generativelanguage.googleapis.com/v1beta
 ```
 Note: if `gemini-1.5-flash` is unavailable for your Google account/version, backend auto-falls back to available Flash models (for example `gemini-flash-latest`).
 Fallback mode (if Gemini key is not set):
 ```bash
-LLM_API_URL=your_custom_llm_endpoint
-LLM_API_KEY=your_custom_llm_key
+LLM_API_URL=<your-custom-llm-endpoint>
+LLM_API_KEY=<your-custom-llm-key>
 ```
 
 Backend runs on `http://localhost:5001`.
 
 ### 3) AI Service
 ```bash
-cd "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/ai-service"
+cd GRIDGUARD-AI-4.0/ai-service
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -83,7 +83,7 @@ uvicorn main:app --host 0.0.0.0 --port 8001
 
 ### 4) Frontend
 ```bash
-cd "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/frontend"
+cd GRIDGUARD-AI-4.0/frontend
 cp .env.example .env
 npm install
 npm run dev -- --host 127.0.0.1 --port 5173
@@ -93,7 +93,7 @@ Open: `http://127.0.0.1:5173`
 
 Login:
 - `admin@gridguard.ai`
-- `admin123`
+- Use the `ADMIN_PASSWORD` value from your local `backend/.env`.
 
 Signup:
 - Open `http://127.0.0.1:5173/signup`
@@ -101,14 +101,14 @@ Signup:
 
 ### 5) Simulator
 ```bash
-cd "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/simulator"
+cd GRIDGUARD-AI-4.0/simulator
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
 export BACKEND_URL=http://localhost:5001
 export ADMIN_EMAIL=admin@gridguard.ai
-export ADMIN_PASSWORD=admin123
-export INGEST_API_KEY=gridguard_ingest_key
+export ADMIN_PASSWORD=<your-admin-password>
+export INGEST_API_KEY=<your-ingest-api-key>
 python simulate.py --count 1000000 --interval 3
 ```
 
@@ -157,7 +157,7 @@ LLM behavior profile:
 
 ## Docker
 ```bash
-cd "/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0"
+cd GRIDGUARD-AI-4.0
 docker compose up --build
 ```
 
@@ -176,5 +176,5 @@ Services:
 - Reports -> S3 (store S3 URL in `executive_reports.file_path`)
 
 ## GeoJSON
-Map geometry is loaded from `/Users/mkm/Desktop/power grid system /GRIDGUARD-AI-4.0/frontend/public/data/india.geo.json`.
+Map geometry is loaded from `frontend/public/data/india.geo.json`.
 Match state names with `regions.name` for region-level coloring.

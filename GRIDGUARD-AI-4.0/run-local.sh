@@ -83,7 +83,7 @@ fi
 if [[ "${1:-}" != "--no-simulator" ]]; then
   start_service \
     "simulator" \
-    "BACKEND_URL=http://127.0.0.1:5010 INGEST_API_KEY=gridguard_ingest_key python3 simulate.py --count 1000000 --interval 3" \
+    "BACKEND_URL=http://127.0.0.1:5010 python3 simulate.py --count 1000000 --interval 3" \
     "$ROOT_DIR/simulator" \
     "$LOG_DIR/simulator.log" \
     "$PID_DIR/simulator.pid"
